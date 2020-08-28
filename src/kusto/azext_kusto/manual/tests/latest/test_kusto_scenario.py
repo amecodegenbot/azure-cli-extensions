@@ -10,7 +10,7 @@
 
 import os
 import unittest
-
+import logging
 from azure_devtools.scenario_tests import AllowLargeResponse
 from azure.cli.testsdk import ScenarioTest
 from .. import try_manual
@@ -18,13 +18,25 @@ from azure.cli.testsdk import ResourceGroupPreparer
 
 
 TEST_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), '..'))
+logger = logging.getLogger('azure.cli.testsdk')
 
 
 @try_manual
 def setup(test, rg):
-    test.kwargs.update({'eventhub_namespace': "codegenlivetest", 'eventhub_name': 'livetest'})
-    test.cmd('az eventhubs namespace create --name {eventhub_namespace} -g {rg}')
-    test.cmd('az eventhubs eventhub create --name {eventhub_name} --namespace-name {eventhub_namespace} -g {rg}')
+    for i in range(100):
+        try:
+            test.kwargs.update({'eventhub_namespace': "codegenlivetest", 'eventhub_name': 'livetest'})
+            if i>0:
+                test.kwargs['eventhub_namespace'] = "codegenlivetest" + str(i)
+            test.cmd('az eventhubs namespace create --name {eventhub_namespace} -g {rg}')
+            test.cmd('az eventhubs eventhub create --name {eventhub_name} --namespace-name {eventhub_namespace} -g {rg}')
+        except:
+            logger.warn("failed to create eventhub " + test.kwargs.get('eventhub_namespace'))
+            continue
+        break
+    else:
+        logger.fatal("setup failed!")
+        exit()
 
 
 # EXAMPLE: kustoclusterscreateorupdate
