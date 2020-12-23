@@ -20,7 +20,6 @@ from .example_steps import step_data_connection_show
 from .example_steps import step_database_list
 from .example_steps import step_attached_database_configuration_list
 from .example_steps import step_database_show
-from .example_steps import step_database_list
 from .example_steps import step_cluster_list_sku
 from .example_steps import step_cluster_show
 from .example_steps import step_cluster_list
@@ -110,9 +109,8 @@ def call_scenario(test, rg):
 @try_manual
 class KustoScenarioTest(ScenarioTest):
 
-    @ResourceGroupPreparer(name_prefix='clitestkusto_kustorptest'[:7], key='rg', parameter_name='rg')
-    def test_kusto_Scenario(self, rg):
-
+    def __init__(self, *args, **kwargs):
+        super(KustoScenarioTest, self).__init__(*args, **kwargs)
         self.kwargs.update({
             'subscription_id': self.get_subscription_id()
         })
@@ -122,13 +120,17 @@ class KustoScenarioTest(ScenarioTest):
             'myAttachedDatabaseConfiguration3': 'default',
             'myCluster2': 'leader4',
             'myCluster3': 'KustoClusterLeader',
-            'myCluster': 'kustoclusterrptest4',
+            'myCluster': self.create_random_name(prefix='kustoclusterrptest4'[:9], length=19),
             'myAttachedDatabaseConfiguration': 'myAttachedDatabaseConfiguration',
-            'myAttachedDatabaseConfiguration2': 'attachedDatabaseConfigurations1',
-            'myDataConnection': 'DataConnections8',
+            'myAttachedDatabaseConfiguration2': self.create_random_name(prefix='attachedDatabaseConfigurations1'[:15],
+                                                                        length=31),
+            'myDataConnection': self.create_random_name(prefix='DataConnections8'[:8], length=16),
             'myDataConnection2': 'kustoeventhubconnection1',
         })
 
+
+    @ResourceGroupPreparer(name_prefix='clitestkusto_kustorptest'[:7], key='rg', parameter_name='rg')
+    def test_kusto_Scenario(self, rg):
         call_scenario(self, rg)
         calc_coverage(__file__)
         raise_if()
