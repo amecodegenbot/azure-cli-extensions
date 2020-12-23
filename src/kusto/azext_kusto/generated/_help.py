@@ -87,9 +87,9 @@ helps['kusto cluster create'] = """
     examples:
       - name: KustoClustersCreateOrUpdate
         text: |-
-               az kusto cluster create --name "kustoclusterrptest4" --type "SystemAssigned" --location "westus" \
---enable-double-encryption false --enable-purge true --enable-streaming-ingest true --sku name="Standard_L8s" \
-capacity=2 tier="Standard" --resource-group "kustorptest"
+               az kusto cluster create --name "kustoclusterrptest4" --type "SystemAssigned" --location \
+"southcentralus" --enable-double-encryption false --enable-purge true --enable-streaming-ingest true --sku \
+name="Standard_D11_v2" capacity=2 tier="Standard" --resource-group "kustorptest"
 """
 
 helps['kusto cluster update'] = """
@@ -140,8 +140,8 @@ helps['kusto cluster update'] = """
     examples:
       - name: KustoClustersUpdate
         text: |-
-               az kusto cluster update --name "kustoclusterrptest4" --type "SystemAssigned" --location "westus" \
---enable-purge true --enable-streaming-ingest true --key-vault-properties key-name="keyName" \
+               az kusto cluster update --name "kustoclusterrptest4" --type "SystemAssigned" --location \
+"southcentralus" --enable-purge true --enable-streaming-ingest true --key-vault-properties key-name="keyName" \
 key-vault-uri="https://dummy.keyvault.com" key-version="keyVersion" --resource-group "kustorptest"
 """
 
@@ -400,7 +400,7 @@ TimeSpan.
       - name: KustoDatabasesCreateOrUpdate
         text: |-
                az kusto database create --cluster-name "kustoclusterrptest4" --database-name "KustoDatabase8" \
---read-write-database location="westus" soft-delete-period="P1D" --resource-group "kustorptest"
+--read-write-database location="southcentralus" soft-delete-period="P1D" --resource-group "kustorptest"
 """
 
 helps['kusto database update'] = """
@@ -630,9 +630,9 @@ helps['kusto attached-database-configuration create'] = """
       - name: AttachedDatabaseConfigurationsCreateOrUpdate
         text: |-
                az kusto attached-database-configuration create --name "attachedDatabaseConfigurations1" --cluster-name \
-"kustoclusterrptest4" --location "westus" --cluster-resource-id "/subscriptions/12345678-1234-1234-1234-123456789098/re\
-sourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterLeader" --database-name "kustodatabase" \
---default-principals-modification-kind "Union" --resource-group "kustorptest"
+"kustoclusterrptest4" --location "southcentralus" --cluster-resource-id "/subscriptions/12345678-1234-1234-1234-1234567\
+89098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterLeader" --database-name \
+"kustodatabase" --default-principals-modification-kind "Union" --resource-group "kustorptest"
 """
 
 helps['kusto attached-database-configuration update'] = """
@@ -719,7 +719,7 @@ helps['kusto data-connection event-hub create'] = """
       - name: KustoDataConnectionsCreateOrUpdate
         text: |-
                az kusto data-connection event-hub create --cluster-name "kustoclusterrptest4" --name \
-"DataConnections8" --database-name "KustoDatabase8" --location "westus" --consumer-group "testConsumerGroup1" \
+"DataConnections8" --database-name "KustoDatabase8" --location "southcentralus" --consumer-group "testConsumerGroup1" \
 --event-hub-resource-id "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Micro\
 soft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1" --resource-group "kustorptest"
 """
@@ -746,7 +746,7 @@ helps['kusto data-connection event-hub update'] = """
       - name: KustoDataConnectionsUpdate
         text: |-
                az kusto data-connection event-hub update --cluster-name "kustoclusterrptest4" --name \
-"DataConnections8" --database-name "KustoDatabase8" --location "westus" --consumer-group "testConsumerGroup1" \
+"DataConnections8" --database-name "KustoDatabase8" --location "southcentralus" --consumer-group "testConsumerGroup1" \
 --event-hub-resource-id "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Micro\
 soft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1" --resource-group "kustorptest"
 """
