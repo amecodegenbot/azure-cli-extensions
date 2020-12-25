@@ -28,19 +28,10 @@ from .example_steps import step_data_connection_event
 from .example_steps import step_database_update
 from .example_steps import step_cluster_detach_follower_database
 from .example_steps import step_cluster_list_follower_database
-from .example_steps import step_cluster_start
-from .example_steps import step_cluster_stop
-from .example_steps import step_cluster_update
 from .example_steps import step_attached_database_configuration_delete
 from .example_steps import step_data_connection_delete
 from .example_steps import step_database_delete
 from .example_steps import step_cluster_delete
-from .example_steps import step_database_principal_assignment_show
-from .example_steps import step_database_principal_assignment_create
-from .example_steps import step_database_principal_assignment_delete
-from .example_steps import step_cluster_principal_assignment_show
-from .example_steps import step_cluster_principal_assignment_create
-from .example_steps import step_cluster_principal_assignment_delete
 from .. import (
     try_manual,
     raise_if,
@@ -88,20 +79,11 @@ def call_scenario(test, rg):
     step_cluster_detach_follower_database(test, rg, checks=[])
     # STEP NOT FOUND: KustoDatabaseCheckNameAvailability
     step_cluster_list_follower_database(test, rg, checks=[])
-    step_cluster_start(test, rg, checks=[])
-    step_cluster_stop(test, rg, checks=[])
-    step_cluster_update(test, rg, checks=[])
     # STEP NOT FOUND: KustoClustersCheckNameAvailability
     step_attached_database_configuration_delete(test, rg, checks=[])
     step_data_connection_delete(test, rg, checks=[])
     step_database_delete(test, rg, checks=[])
     step_cluster_delete(test, rg, checks=[])
-    step_database_principal_assignment_show(test, rg, checks=[])
-    step_database_principal_assignment_create(test, rg, checks=[])
-    step_database_principal_assignment_delete(test, rg, checks=[])
-    step_cluster_principal_assignment_show(test, rg, checks=[])
-    step_cluster_principal_assignment_create(test, rg, checks=[])
-    step_cluster_principal_assignment_delete(test, rg, checks=[])
     cleanup_scenario(test, rg)
 
 
