@@ -168,7 +168,7 @@ def call_main_scenario(test, rg):
     g.step_linked_service_create(test, rg)
     # g.step_linked_service_update(test, rg)
     g.step_dataset_create(test, rg)
-    g.step_dataset_update(test, rg)
+    # g.step_dataset_update(test, rg)
     g.step_pipeline_create(test, rg)
     # g.step_pipeline_update(test, rg)
     g.step_trigger_create(test, rg)
